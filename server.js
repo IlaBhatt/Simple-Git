@@ -27,6 +27,17 @@ async function gitCommit() {
     console.log(stdout);
   });
 }
+// async function gitPush() {
+//   exec("git push", (error, stdout, stderr) => {
+//     if (error) {
+//       console.log(error);
+//     }
+//     if (stderr) {
+//       console.log(stderr);
+//     }
+//     console.log(stdout);
+//   });
+// }
 
 async function gitCheckout() {
   exec("git checkout feature", (error, stdout, stderr) => {
@@ -43,6 +54,7 @@ async function gitCheckout() {
 async function f1() {
   await gitAdd();
   await gitCommit();
+  // await gitPush();
   await gitCheckout();
 }
 
