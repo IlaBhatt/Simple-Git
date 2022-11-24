@@ -3,7 +3,8 @@ const shell = require("shelljs");
 // shell.exec('./feature')
 const { exec } = require("node:child_process");
 // \n git commit -m \"hi\" \n git push --set-upstream origin main
-exec('git add . \n git commit -m "hi" \n git push', (error, stdout, stderr) => {
+// \n git commit -m "h1" \n git checkout feature \n git add . \n git commit -m "hi" \n git push --set-upstream origin feature
+exec("git add .", (error, stdout, stderr) => {
   if (error) {
     console.log(error);
   }
