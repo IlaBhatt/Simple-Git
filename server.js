@@ -129,8 +129,8 @@ if (fs.existsSync(this.localPath)) {
 
 async function checkoutandcommit() {
   const add = await simpleGit().add(".");
-  const commit = await simpleGit().commit("hello");
+  const commit = await simpleGit().commit("Added hi.txt");
   const push = await simpleGit().push();
-  const checkout = await simpleGit().checkout("feature");
+  const checkout = await simpleGit().checkout("test");
 }
 checkoutandcommit();
