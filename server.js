@@ -47,16 +47,16 @@ if (fs.existsSync(this.localPath)) {
 //   );
 
 // Add all files for commit
-simpleGit()
-  .add(".")
-  .then(
-    (addSuccess) => {
-      console.log(addSuccess + "Added successfully");
-    },
-    (failedAdd) => {
-      console.log("adding files failed" + failedAdd);
-    }
-  );
+// simpleGit()
+//   .add(".")
+//   .then(
+//     (addSuccess) => {
+//       console.log(addSuccess + "Added successfully");
+//     },
+//     (failedAdd) => {
+//       console.log("adding files failed" + failedAdd);
+//     }
+//   );
 
 // Commit files as Initial Commit
 // simpleGit()
@@ -95,7 +95,7 @@ simpleGit()
 //   );
 
 // simpleGit()
-//   .checkout()
+//   .checkout("feature")
 //   .then(
 //     (success) => {
 //       console.log("Successfully checked out" + success);
@@ -126,3 +126,11 @@ simpleGit()
 //       console.log("Fetch failed! " + failed);
 //     }
 //   );
+
+async function checkoutandcommit() {
+  const add = await simpleGit().add(".");
+  const commit = await simpleGit().commit("hello");
+  const push = await simpleGit().push();
+  const checkout = await simpleGit().checkout("feature");
+}
+checkoutandcommit();
