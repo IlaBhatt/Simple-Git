@@ -136,7 +136,7 @@ if (fs.existsSync(this.localPath)) {
 // checkoutandcommit();
 
 async function addCommitPush() {
-  const add = await simpleGit().add(".");
+  const add = await simpleGit().add(["--all", "."]);
   const commit = await simpleGit().commit("Added hi.js");
   const push = await simpleGit().push();
 }
