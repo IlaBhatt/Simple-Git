@@ -1,90 +1,128 @@
-// hello
-const shell = require("shelljs");
-// shell.exec('./feature')
-const { exec } = require("node:child_process");
-// \n git commit -m \"hi\" \n git push --set-upstream origin main
-// \n git commit -m "h1" \n git checkout feature \n git add . \n git commit -m "hi" \n git push --set-upstream origin feature
-async function gitAdd() {
-  exec("git add .", (error, stdout, stderr) => {
-    if (error) {
-      console.log(error);
-    }
-    if (stderr) {
-      console.log(stderr);
-    }
-    console.log(stdout);
-  });
+const simpleGit = require("simple-git");
+const url = require("url");
+const fs = require("fs");
+const shellJs = require("shelljs");
+
+simpleGit().clean(simpleGit.CleanOptions.FORCE);
+
+this.gitURL = "https://github.com/IlaBhatt/Simple-Git.git";
+// const localURL = url.parse(this.gitURL);
+const localRepoName = "Simple-Git";
+this.localPath = `C:/Users/ilabhatt/Desktop/simple-git/${localRepoName}`;
+// this.options = ["--depth", "1"];
+this.callback = () => {
+  console.log("DONE");
+};
+
+if (fs.existsSync(this.localPath)) {
+  console.log("File Already present");
+} else {
+  simpleGit().clone(this.gitURL, this.localPath, this.options, this.callback);
 }
 
-async function gitCommit() {
-  exec('git commit -m "hi"', (error, stdout, stderr) => {
-    if (error) {
-      console.log(error);
-    }
-    if (stderr) {
-      console.log(stderr);
-    }
-    console.log(stdout);
-  });
-}
-// async function gitPush() {
-//   exec("git push", (error, stdout, stderr) => {
-//     if (error) {
-//       console.log(error);
-//     }
-//     if (stderr) {
-//       console.log(stderr);
-//     }
-//     console.log(stdout);
-//   });
-// }
+// console.log(simpleGit().branchLocal());
 
-async function gitCheckout() {
-  exec("git checkout feature", (error, stdout, stderr) => {
-    if (error) {
-      console.log(error);
+// shellJs.cd(this.localPath);
+// simpleGit().addRemote("origin", this.gitURL);
+// simpleGit()
+//   .checkout("feature")
+//   .then(
+//     (success) => {
+//       console.log("Successfully checked out");
+//     },
+//     (failed) => {
+//       console.log("Checkout failed!");
+//     }
+//   );
+//Shows the branch summary result
+// simpleGit()
+//   .branch(["--all"])
+//   .then(
+//     (success) => {
+//       console.log(success);
+//     },
+//     (failed) => {
+//       console.log(failed);
+//     }
+//   );
+
+// Add all files for commit
+simpleGit()
+  .add(".")
+  .then(
+    (addSuccess) => {
+      console.log(addSuccess + "Added successfully");
+    },
+    (failedAdd) => {
+      console.log("adding files failed" + failedAdd);
     }
-    if (stderr) {
-      console.log(stderr);
-    }
-    console.log(stdout);
-  });
-}
+  );
 
-async function f1() {
-  await gitAdd();
-  await gitCommit();
-  // await gitPush();
-  await gitCheckout();
-}
+// Commit files as Initial Commit
+// simpleGit()
+//   .commit("Intial commit by simplegit")
+//   .then(
+//     (successCommit) => {
+//       console.log(successCommit + "Changes commited!");
+//     },
+//     (failed) => {
+//       console.log("failed commmit");
+//     }
+//   );
 
-f1();
-// exec(
+// Finally push to online repository
+// simpleGit()
+//   .push("origin", "main")
+//   .then(
+//     (success) => {
+//       console.log("repo successfully pushed!");
+//     },
+//     (failed) => {
+//       console.log("repo push failed");
+//     }
+//   );
 
-//   'git merge feature',
-//   (error, stdout, stderr) => {
-//     if (error) {
-//       console.log(error);
+//Pulling changes from remote repo
+// simpleGit()
+//   .pull("origin", "test")
+//   .then(
+//     (success) => {
+//       console.log("repo successfully pulled!");
+//     },
+//     (failed) => {
+//       console.log("repo pull failed");
 //     }
-//     if (stderr) {
-//       console.log(stderr);
+//   );
+
+// simpleGit()
+//   .checkout()
+//   .then(
+//     (success) => {
+//       console.log("Successfully checked out" + success);
+//     },
+//     (failed) => {
+//       console.log("Checkout failed!" + failed);
 //     }
-//     console.log(stdout);
-//   }
-// );
-// let st=''
-// exec(
-//  "git diff --name-only ..origin/feature",
-//   (error, stdout, stderr) => {
-//     if (error) {
-//       console.log(error);
+//   );
+
+// simpleGit()
+//   .merge("feature", ["--commit"])
+//   .then(
+//     (success) => {
+//       console.log("Merge successful " + success);
+//     },
+//     (failed) => {
+//       console.log("Merge failed! " + failed);
 //     }
-//     if (stderr) {
-//       console.log(stderr);
+//   );
+
+// simpleGit()
+//   .fetch(["--all"])
+//   .then(
+//     (success) => {
+//       console.log("Successfully Fetched " + success);
+//     },
+//     (failed) => {
+//       console.log("Fetch failed! " + failed);
 //     }
-//     st=stdout
-//     console.log('st',st);
-//     console.log(stdout);
-//   }
-// );
-// console.log(st);
+//   );
