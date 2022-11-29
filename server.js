@@ -71,16 +71,16 @@ if (fs.existsSync(this.localPath)) {
 //   );
 
 // Finally push to online repository
-// simpleGit()
-//   .push("origin", "main")
-//   .then(
-//     (success) => {
-//       console.log("repo successfully pushed!");
-//     },
-//     (failed) => {
-//       console.log("repo push failed");
-//     }
-//   );
+simpleGit()
+  .push("origin", "main")
+  .then(
+    (success) => {
+      console.log("repo successfully pushed!");
+    },
+    (failed) => {
+      console.log("repo push failed");
+    }
+  );
 
 //Pulling changes from remote repo
 // simpleGit()
@@ -138,6 +138,6 @@ if (fs.existsSync(this.localPath)) {
 async function addCommitPush() {
   const add = await simpleGit().add(".");
   const commit = await simpleGit().commit("Added xyz.txt");
-  const push = await simpleGit().push();
+  const push = await simpleGit().push("origin", "main");
 }
 addCommitPush();
